@@ -23,8 +23,8 @@ mongoose
   .then(() => console.log("Connected to Database"))
   .catch((err) => console.log(err));
 
-app.use("/api/user", userRoute);
-app.use("/api/register", trackerRoute);
+app.use("/api/user/register", userRoute);
+app.use("/api/tracker", trackerRoute);
 
 const PORT = process.env.PORT || 4001;
 app.listen(PORT, () => `Listening on http://localhost: ${PORT}`);
