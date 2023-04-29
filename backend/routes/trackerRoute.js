@@ -3,6 +3,12 @@ const router = express.Router();
 
 const Tracker = require("../models/Tracker");
 
+/*
+  CREATE NEW TRACKER
+  ROUTE: /api/tracker
+  PAYLOAD: { username, title, desc, rating, lat, log }
+*/
+
 router.post("/", async (req, res) => {
   const newTracker = new Tracker(req.body);
 
