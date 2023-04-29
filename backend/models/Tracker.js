@@ -35,4 +35,4 @@ const TrackerSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.Schema("Tracker", TrackerSchema);
+module.exports = mongoose.model("Tracker", TrackerSchema);
