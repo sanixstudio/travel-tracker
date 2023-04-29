@@ -24,7 +24,7 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use("/api/user", userRoute);
-app.use("/api/trcker", trackerRoute);
+app.use("/api/register", trackerRoute);
 
 const PORT = process.env.PORT || 4001;
 app.listen(PORT, () => `Listening on http://localhost: ${PORT}`);

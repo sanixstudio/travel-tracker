@@ -1,11 +1,17 @@
 const express = require("express");
 const router = express.Router();
 
-const Tracker = require('../models/Tracker')
+const Tracker = require("../models/Tracker");
 
-router.get("/", (req, res) => {
-  res.send("Tracker Route");
+router.post("/", async (req, res) => {
+  const newTracker = new Tracker(req.body);
+
+  try {
+    const tracker = await newTracker.save();
+    res.status(200).json(tracker);
+  } catch (err) {
+    res.status(500).json("Error: " + err);
+  }
 });
 
-// router.post("/", (req, res) => {});
-module.exports = router
+module.exports = router;
