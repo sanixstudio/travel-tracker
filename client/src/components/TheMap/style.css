@@ -1,0 +1,47 @@
+.tab-btn {
+  background: teal;
+  margin: 1em;
+}
+
+.pop-pup > div > *:nth-child(2) {
+  background: #919191bb;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pop-pup > div > *:nth-child(2):hover {
+  background: #5f5f5f;
+}
+
+.pop-pup .tracker-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.pop-pup .tracker-card > div {
+  border-bottom: 1px solid #88888849;
+  padding: .5em 0;
+}
+
+.pop-pup .tracker-card > div:last-child {
+  border-bottom: none;
+}
+
+.pop-pup .header {
+}
+
+.pop-pup .title {
+  font-size: 1.2rem;
+}
+
+.pop-pup .ratings {
+  display: flex;
+  flex-direction: column;
+}
+
+.pop-pup .user {
+    display: flex;
+}
