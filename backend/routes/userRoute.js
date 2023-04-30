@@ -56,7 +56,7 @@ router.post(
         expiresIn: "1h",
       });
 
-      res.json({ token });
+      res.json({ token, _id: user._id, user, username, email });
     } catch (error) {
       console.error(error.message);
       res.status(500).send("Server error");
@@ -108,7 +108,7 @@ router.post(
         expiresIn: "1h",
       });
 
-      res.json({ token });
+      res.json({ token, _id: user._id, user, username, email });
     } catch (error) {
       console.error(error.message);
       res.status(500).send("Server error");

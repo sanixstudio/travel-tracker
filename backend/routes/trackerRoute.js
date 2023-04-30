@@ -9,7 +9,16 @@ const Tracker = require("../models/Tracker");
   PAYLOAD: { username, title, desc, rating, lat, log }
 */
 
-router.post("/", async (req, res) => {
+router.get("/", async (req, res) => {
+  try {
+    const trackers = await Tracker.find();
+    res.status(200).send(trackers);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+router.post("/create", async (req, res) => {
   const newTracker = new Tracker(req.body);
 
   try {
