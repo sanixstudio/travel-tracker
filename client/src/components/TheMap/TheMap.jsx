@@ -10,14 +10,13 @@ import Map, {
 // import { TiLocation } from "react-icons/ti";
 import { FaStar } from "react-icons/fa";
 import "./style.css";
+import Header from "../Header/Header";
 
 function TheMap() {
   const [viewState, setViewState] = React.useState({
     longitude: -122.404,
     latitude: 37.78,
     zoom: 10,
-    width: 500,
-    height: 300,
   });
 
   const [showPopup, setShowPopup] = useState(true);
@@ -28,21 +27,20 @@ function TheMap() {
 
   return (
     <>
-      <button className="tab-btn" onClick={() => setShowPopup(true)}>
-        Show Trackers
-      </button>
       <Map
         reuseMaps
         {...viewState}
         onMove={(evt) => setViewState(evt.viewState)}
         mapStyle="mapbox://styles/mapbox/streets-v9"
         mapboxAccessToken={mapboxToken}
-        style={{ width: "90vw", maxWidth: "1200px", height: "500px" }}
+        className="map"
+        style={{ width: "100vw", height: "100vh" }}
         onClick={(e) => {
           console.log({ Lat: e.lngLat.lat, Long: e.lngLat.lng });
         }}
         cursor="default"
       >
+        <Header showPopup={showPopup} setShowPopup={setShowPopup} />
         {/* <Marker longitude={-122.404} latitude={37.78} anchor="bottom">
         <TiLocation color="red" size={24} />
       </Marker> */}
@@ -56,9 +54,9 @@ function TheMap() {
             className="pop-pup"
           >
             <div className="tracker-card">
-              <div className="header">
+              <div className="tracker-header">
                 <label>Place</label>
-                <h4 className="title">Sales Force Tower</h4>
+                <h3 className="title">Sales Force Tower</h3>
               </div>
               <div className="reviews">
                 <label>Review</label>
@@ -66,7 +64,7 @@ function TheMap() {
               </div>
               <div className="ratings">
                 <label>Rating</label>
-                <div>
+                <div className="stars">
                   <FaStar />
                   <FaStar />
                   <FaStar />
@@ -76,7 +74,7 @@ function TheMap() {
               </div>
               <div className="information">
                 <span className="user">
-                  Created by <b>Sanam</b>
+                  Created by &nbsp;<b>Sanam</b>
                 </span>
                 <span className="time">1 hour ago</span>
               </div>
@@ -84,9 +82,12 @@ function TheMap() {
           </Popup>
         ) : null}
         <ScaleControl />
-        <NavigationControl />
-        <FullscreenControl />
-        <GeolocateControl onGeolocate={(e) => console.log(e.coords)} />
+        <NavigationControl position="bottom-right" />
+        <FullscreenControl position="bottom-right" />
+        <GeolocateControl
+          position="bottom-right"
+          onGeolocate={(e) => console.log(e.coords)}
+        />
       </Map>
     </>
   );
