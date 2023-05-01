@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Map, {
   FullscreenControl,
   GeolocateControl,
@@ -8,10 +8,11 @@ import Map, {
   ScaleControl,
 } from "react-map-gl";
 import { TiLocation } from "react-icons/ti";
-import { FaStar } from "react-icons/fa";
 import "./style.css";
-import Header from "../Header/Header";
+// import Header from "../Header/Header";
 import TrackerForm from "../TrackerForm/TrackerForm";
+import Popups from "../Popups/Popups";
+import AppHeader from "../AppHeader/AppHeader";
 
 function TheMap() {
   const [viewState, setViewState] = React.useState({
@@ -20,13 +21,25 @@ function TheMap() {
     zoom: 10,
   });
 
-  const [showPopup, setShowPopup] = useState(false);
+  const [allTrackers, setAllTrackers] = useState([]);
+  const [showAllPopup, setShowAllPopup] = useState(false);
   const [formIsOpen, setFormIsOpen] = useState(false);
   const [formPostion, setFormPostion] = useState({ lat: 0, long: 0 });
   const [longitude, setLongitude] = useState(-122.404);
   const [latitude, setLatitude] = useState(37.78);
 
   const mapboxToken = import.meta.env.VITE_PUBLIC_KEY;
+
+  useEffect(() => {
+    const fetchTrackers = async () => {
+      const res = await fetch(`${import.meta.env.VITE_HOST}`);
+      const trackers = await res.json();
+      setAllTrackers(trackers);
+    };
+    fetchTrackers();
+  }, []);
+
+  console.log(allTrackers);
 
   return (
     <>
@@ -47,7 +60,8 @@ function TheMap() {
         }}
         cursor="default"
       >
-        <Header showPopup={showPopup} setShowPopup={setShowPopup} />
+        {/* <Header showAllPopup={showAllPopup} setShowAllPopup={setShowAllPopup} /> */}
+        <AppHeader />
         <Marker
           longitude={formPostion.long}
           latitude={formPostion.lat}
@@ -55,49 +69,17 @@ function TheMap() {
         >
           <TiLocation color="red" size={24} />
         </Marker>
-        {showPopup ? (
-          <Popup
-            longitude={longitude}
-            latitude={latitude}
-            anchor="right"
-            closeButton
-            onClose={() => setShowPopup(false)}
-            className="pop-pup"
-          >
-            <div className="tracker-card">
-              <div className="tracker-header">
-                <label>Place</label>
-                <h3 className="title">Sales Force Tower</h3>
-              </div>
-              <div className="reviews">
-                <label>Review</label>
-                <p>A nice place to shit on the street and enjoy the food</p>
-              </div>
-              <div className="ratings">
-                <label>Rating</label>
-                <div className="stars">
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                </div>
-              </div>
-              <div className="information">
-                <span className="user">
-                  Created by &nbsp;<b>Sanam</b>
-                </span>
-                <span className="time">1 hour ago</span>
-              </div>
-            </div>
-          </Popup>
-        ) : null}
+        {allTrackers
+          ? allTrackers.map((tracker) => (
+              <Popups tracker={tracker} showAllPopup={showAllPopup} />
+            ))
+          : null}
         {formIsOpen ? (
           <Popup
             latitude={formPostion.lat}
             longitude={formPostion.long}
             anchor="right"
-            closeButton
+            closeButton={true}
             onClose={() => setShowPopup(false)}
           >
             <TrackerForm
