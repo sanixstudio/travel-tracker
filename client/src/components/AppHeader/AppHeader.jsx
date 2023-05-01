@@ -13,9 +13,9 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 
-import './style.css'
+import "./style.css";
 
-const pages = ["Products", "Pricing", "Blog"];
+const pages = ["Show Pins", "Hide Pins", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function AppHeader() {
@@ -41,7 +41,23 @@ function AppHeader() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <Box
+            sx={{
+              background: "#fff",
+              display: "flex",
+              borderRadius: "50%",
+              padding: "2px",
+              marginRight: "1em",
+              border: "solid 1px red #fff",
+            }}
+          >
+            <img
+              src="https://adi-personal.s3.amazonaws.com/codepaws.png"
+              width={46}
+              height={46}
+              alt=""
+            />
+          </Box>
           <Typography
             variant="h6"
             noWrap
@@ -57,7 +73,7 @@ function AppHeader() {
               textDecoration: "none",
             }}
           >
-            LOGO
+            Purrgramer
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -91,8 +107,7 @@ function AppHeader() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  {/* <Typography textAlign="center">{page}</Typography> */}
-                  <Button>{page}</Button>
+                  <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>

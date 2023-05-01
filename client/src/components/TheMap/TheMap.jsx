@@ -71,7 +71,11 @@ function TheMap() {
         </Marker>
         {allTrackers
           ? allTrackers.map((tracker) => (
-              <Popups tracker={tracker} showAllPopup={showAllPopup} />
+              <Popups
+                key={tracker._id}
+                tracker={tracker}
+                showAllPopup={showAllPopup}
+              />
             ))
           : null}
         {formIsOpen ? (
