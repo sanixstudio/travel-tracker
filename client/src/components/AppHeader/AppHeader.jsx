@@ -40,7 +40,9 @@ function AppHeader() {
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
+        <Toolbar
+          sx={{ background: "rgba(0, 0, 0, .7)", borderRadius: "0 0 3em 3em" }}
+        >
           <Box
             sx={{
               background: "#fff",
@@ -48,7 +50,6 @@ function AppHeader() {
               borderRadius: "50%",
               padding: "2px",
               marginRight: "1em",
-              border: "solid 1px red #fff",
             }}
           >
             <img

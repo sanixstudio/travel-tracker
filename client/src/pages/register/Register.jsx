@@ -58,9 +58,9 @@ export default function Register() {
           >
             <Box>
               <img
-                src="https://adi-personal.s3.amazonaws.com/codepaws.png"
-                width={64}
-                height={64}
+                src="https://adi-personal.s3.amazonaws.com/travel_cat.png"
+                width={92}
+                height={92}
                 alt=""
               />
             </Box>
