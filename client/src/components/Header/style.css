@@ -9,4 +9,11 @@
     left: 0;
     right: 0;
     z-index: 10;
+    padding: 1em 0;
 }
+
+.tab-btn {
+    background: teal;
+    margin: 1em;
+    font-size: 1rem;
+  }

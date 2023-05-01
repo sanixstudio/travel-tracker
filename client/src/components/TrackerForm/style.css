@@ -1,0 +1,31 @@
+.tracker-form {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  color: #000;
+  padding: 1em;
+  gap: 1em;
+}
+
+.tracker-form textarea,
+.tracker-form input[type="text"] {
+  padding: 1em;
+  background: #fff;
+  border: 1px solid #aaa;
+  color: #000;
+}
+
+.tracker-form select{
+    background: #fff;
+    color: #000;
+}
+
+.tracker-form-btn {
+  display: flex;
+  margin-top: 0.5em;
+  justify-content: space-between;
+}
+
+.tracker-form-btn > :first-child {
+  background: teal;
+}
