@@ -1,44 +1,78 @@
 import { Popup } from "react-map-gl";
-import { FaStar } from "react-icons/fa";
+import { FaChevronDown, FaStar } from "react-icons/fa";
 import { format } from "timeago.js";
 import { v4 as uuidv4 } from "uuid";
+import { Box, Card, CardContent, CardHeader, Typography } from "@mui/material";
+import { useState } from "react";
 import "./style.css";
 
 const Popups = ({ tracker, showAllPopup }) => {
+  const handleExpandClick = () => {
+    setShowDetails(!showDetails);
+  };
+
+  const [showDetails, setShowDetails] = useState(false);
+
+  console.log(tracker);
+
   if (showAllPopup) {
     return (
       <Popup
         longitude={tracker.long}
         latitude={tracker.lat}
         anchor="right"
-        closeButton
+        closeButton={false}
         closeOnClick={false}
-        className="pop-pup"
+        style={{
+          zIndex: showDetails ? 100 : "initial",
+        }}
       >
-        <div className="tracker-card">
-          <div className="tracker-header">
-            <label>Place</label>
-            <h3 className="title">{tracker.title}</h3>
-          </div>
-          <div className="reviews">
-            <label>Review</label>
-            <p>{tracker.desc}</p>
-          </div>
-          <div className="ratings">
-            <label>Ratings</label>
-            <div className="stars">
-              {new Array(tracker.rating).fill(null).map(() => (
-                <FaStar key={uuidv4()} />
-              ))}
-            </div>
-          </div>
-          <div className="information">
-            <span className="user">
-              Created by &nbsp;<b>{tracker.username}</b>
-            </span>
-            <span className="time">{format(tracker.createdAt)}</span>
-          </div>
-        </div>
+        <Card sx={{ maxWidth: 400 }}>
+          <CardHeader
+            title={tracker.title}
+            action={
+              <FaChevronDown
+                style={{
+                  width: "20px",
+                  height: "20px",
+                  marginTop: ".7em",
+                  marginLeft: "1em",
+                  cursor: "pointer",
+                }}
+                onClick={handleExpandClick}
+              />
+            }
+            sx={{
+              background: "teal",
+              color: "white",
+            }}
+          />
+          <CardContent sx={{ display: showDetails ? "block" : "none" }}>
+            <Box sx={{ marginBottom: 2 }}>
+              <Typography variant="subtitle2">Review</Typography>
+              <Typography variant="body1">{tracker.desc}</Typography>
+            </Box>
+            <Box sx={{ marginBottom: 2 }}>
+              <Typography variant="subtitle2">Ratings</Typography>
+              <Box sx={{ display: "flex" }}>
+                {[...Array(tracker.rating)].map((_, index) => (
+                  <FaStar key={uuidv4()} sx={{ color: "gold" }} />
+                ))}
+              </Box>
+            </Box>
+            <Box>
+              <Typography
+                variant="subtitle2"
+                sx={{ textTransform: "capitalize", fontWeight: "bold" }}
+              >
+                By {tracker.username}
+              </Typography>
+              <Typography variant="subtitle2">
+                {format(tracker.createdAt)}
+              </Typography>
+            </Box>
+          </CardContent>
+        </Card>
       </Popup>
     );
   } else return null;

@@ -14,6 +14,11 @@ const theme = createTheme({
       cyan: "#00FFFF",
       contrastText: "#ffcc00",
     },
+    teal: {
+      main: "#0aadad",
+      light: "#008080",
+      dark: "#045252",
+    },
   },
 });
 
