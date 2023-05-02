@@ -1,15 +1,17 @@
-const { createTheme } = require("@mui/material");
-const { dark } = require("@mui/material/styles/createPalette");
+import { createTheme } from "@mui/material";
 
 const theme = createTheme({
   palette: {
-    mode: dark,
     primary: {
-      main: "#ff4400",
+      main: "#90caf9",
+      light: "#e3f2fd",
+      dark: "#42a5f5",
     },
     secondary: {
-      light: "#0066ff",
-      main: "#0044ff",
+      light: "#f3e5f5",
+      main: "#ce93d8",
+      dark: "#ab47bc",
+      cyan: "#00FFFF",
       contrastText: "#ffcc00",
     },
   },

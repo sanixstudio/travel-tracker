@@ -6,6 +6,8 @@ import App from "./App.jsx";
 import { Login, Register } from "./pages";
 
 import "./index.css";
+import { ThemeProvider } from "@emotion/react";
+import theme from "./context/themeProvider.jsx";
 
 const router = createBrowserRouter([
   { path: "/", element: <App />, errorElement: <h1>Error:</h1> },
@@ -15,10 +17,12 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <AppContextProvider>
-      <RouterProvider router={router}>
-        <App />
-      </RouterProvider>
-    </AppContextProvider>
+    <ThemeProvider theme={theme}>
+      <AppContextProvider>
+        <RouterProvider router={router}>
+          <App />
+        </RouterProvider>
+      </AppContextProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );

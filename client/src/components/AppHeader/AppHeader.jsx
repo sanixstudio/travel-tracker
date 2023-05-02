@@ -12,13 +12,11 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import theme from "../../context/themeProvider";
 
-import "./style.css";
-
-const pages = ["Show Pins", "Hide Pins", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
-function AppHeader() {
+function AppHeader({ showAllPopup, setShowAllPopup }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -31,6 +29,7 @@ function AppHeader() {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+    setShowAllPopup(!showAllPopup);
   };
 
   const handleCloseUserMenu = () => {
@@ -41,7 +40,11 @@ function AppHeader() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar
-          sx={{ background: "rgba(0, 0, 0, .7)", borderRadius: "0 0 3em 3em" }}
+          sx={{
+            background: "rgba(0, 0, 0, .8)",
+            borderRadius: "0 0 3em 3em",
+            zIndex: 10,
+          }}
         >
           <Box
             sx={{
@@ -70,7 +73,7 @@ function AppHeader() {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
+              color: "secondary.cyan",
               textDecoration: "none",
             }}
           >
@@ -106,11 +109,11 @@ function AppHeader() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem key={2} onClick={handleCloseNavMenu}>
+                <Typography textAlign="center">
+                  {showAllPopup ? "Hide Popups" : "Show Popups"}
+                </Typography>
+              </MenuItem>
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -133,15 +136,19 @@ function AppHeader() {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{
+                my: 2,
+                color: "white",
+                display: "block",
+                textTransform: "capitalize",
+                border: `solid 1px ${theme.palette.secondary.cyan}`,
+                "&:hover, &:active, &:focus": { outline: "none" },
+              }}
+            >
+              {showAllPopup ? "Hide Popups" : "Show Popups"}
+            </Button>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>

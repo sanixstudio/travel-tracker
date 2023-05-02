@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import axios from "axios";
 // import PropTypes from "prop-types";
 import "./style.css";
 
-const TrackerForm = ({ onAddTracker, setFormIsOpen }) => {
+const TrackerForm = ({ currentPosition, setFormIsOpen }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [rating, setRating] = useState(0);
@@ -18,23 +19,33 @@ const TrackerForm = ({ onAddTracker, setFormIsOpen }) => {
 
     // Create tracker object
     const tracker = {
+      username: "Adi",
+      long: currentPosition.long,
+      lat: currentPosition.lat,
       title,
-      description,
+      desc: description,
       rating,
     };
 
-    // Call onAddTracker function with tracker object
-    // onAddTracker(tracker);
+    axios
+      .post(import.meta.env.VITE_HOST + "/tracker/create", tracker)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 
     // Reset form
     setTitle("");
     setDescription("");
     setRating("");
+    setFormIsOpen(false);
   };
 
   return (
-    <form className="tracker-form" onSubmit={onSubmit}>
-      <div className="form-control">
+    <form className="tracker-form" onSubmit={onSubmit} style={{ zIndex: 100 }}>
+      <div className="form-control" style={{ zIndex: 100 }}>
         <label htmlFor="title">Title</label>
         <input
           type="text"
@@ -57,7 +68,7 @@ const TrackerForm = ({ onAddTracker, setFormIsOpen }) => {
         <select
           id="rating"
           value={rating}
-          onChange={(e) => setRating(e.target.value)}
+          onChange={(e) => setRating(+e.target.value)}
         >
           <option value="">-- Select rating --</option>
           <option value="1">1</option>
@@ -68,7 +79,7 @@ const TrackerForm = ({ onAddTracker, setFormIsOpen }) => {
         </select>
       </div>
       <div className="tracker-form-btn">
-        <button className="btn" type="submit">
+        <button className="btn" type="submit" onClick={() => onSubmit}>
           Add Tracker
         </button>
         <button
