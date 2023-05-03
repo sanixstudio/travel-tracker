@@ -12,13 +12,13 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import FmdGoodIcon from "@mui/icons-material/FmdGood";
 import theme from "../../context/themeProvider";
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function AppHeader({ showAllPopup, setShowAllPopup }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -32,27 +32,23 @@ function AppHeader({ showAllPopup, setShowAllPopup }) {
     setShowAllPopup(!showAllPopup);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar
           sx={{
-            background: "rgba(0, 0, 0, .8)",
+            background: "rgba(0, 0, 0, .7)",
             borderRadius: "0 0 3em 3em",
             zIndex: 10,
           }}
         >
           <Box
             sx={{
-              background: "#fff",
               display: "flex",
               borderRadius: "50%",
               padding: "2px",
               marginRight: "1em",
+              backgroundColor: "common.white",
             }}
           >
             <img
@@ -63,7 +59,7 @@ function AppHeader({ showAllPopup, setShowAllPopup }) {
             />
           </Box>
           <Typography
-            variant="h6"
+            variant="h5"
             noWrap
             component="a"
             href="/"
@@ -73,7 +69,8 @@ function AppHeader({ showAllPopup, setShowAllPopup }) {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "secondary.cyan",
+              color: "teal.main",
+              marginRight: "2em",
               textDecoration: "none",
             }}
           >
@@ -111,7 +108,7 @@ function AppHeader({ showAllPopup, setShowAllPopup }) {
             >
               <MenuItem key={2} onClick={handleCloseNavMenu}>
                 <Typography textAlign="center">
-                  {showAllPopup ? "Hide Popups" : "Show Popups"}
+                  {showAllPopup ? "Hide Pins" : "Show Pins"}
                 </Typography>
               </MenuItem>
             </Menu>
@@ -138,16 +135,20 @@ function AppHeader({ showAllPopup, setShowAllPopup }) {
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <Button
               onClick={handleCloseNavMenu}
-              sx={{
-                my: 2,
-                color: "white",
-                display: "block",
-                textTransform: "capitalize",
-                border: `solid 1px ${theme.palette.secondary.cyan}`,
-                "&:hover, &:active, &:focus": { outline: "none" },
-              }}
+              variant="contained"
+              disableElevation
+              color="teal"
+              sx={{ color: "#fff" }}
             >
-              {showAllPopup ? "Hide Popups" : "Show Popups"}
+              <Typography
+                sx={{
+                  textTransform: "capitalize",
+                  mr: 1
+                }}
+              >
+                {showAllPopup ? "Hide Pins" : "Show Pins"}
+              </Typography>
+              <FmdGoodIcon />
             </Button>
           </Box>
 
@@ -157,28 +158,6 @@ function AppHeader({ showAllPopup, setShowAllPopup }) {
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
           </Box>
         </Toolbar>
       </Container>

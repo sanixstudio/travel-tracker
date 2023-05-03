@@ -15,9 +15,13 @@ const theme = createTheme({
       contrastText: "#ffcc00",
     },
     teal: {
-      main: "#0aadad",
-      light: "#008080",
+      main: "#008080",
+      light: "#0aadad",
       dark: "#045252",
+    },
+    common: {
+      white: "#ffffff",
+      black: "#000000",
     },
   },
 });
