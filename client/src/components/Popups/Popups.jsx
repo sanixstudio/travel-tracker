@@ -13,8 +13,6 @@ const Popups = ({ tracker, showAllPopup }) => {
 
   const [showDetails, setShowDetails] = useState(false);
 
-  console.log(tracker);
-
   if (showAllPopup) {
     return (
       <Popup

@@ -9,23 +9,6 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Purrgrammer
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
 const theme = createTheme();
 
 export default function Login() {
@@ -40,12 +23,27 @@ export default function Login() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ display: "flex", height: "100vh", alignItems: "center" }}>
-        <Container component="main" maxWidth="xs">
+      <Box
+        sx={{
+          display: "fixed",
+          width: "100vw",
+          height: "100vh",
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          alignItems: "center",
+        }}
+      >
+        <Container
+          component="main"
+          maxWidth="xs"
+          sx={{
+            background: theme.palette.common.white,
+            paddingY: 3,
+            borderRadius: "15px",
+          }}
+        >
           <CssBaseline />
           <Box
             sx={{
-              marginTop: 8,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -89,10 +87,6 @@ export default function Login() {
                 id="password"
                 autoComplete="current-password"
               />
-              {/* <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              /> */}
               <Button
                 type="submit"
                 fullWidth
@@ -102,11 +96,6 @@ export default function Login() {
                 Sign In
               </Button>
               <Grid container>
-                {/* <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid> */}
                 <Grid item>
                   <Link href="/register" variant="body2">
                     {"Don't have an account? Sign Up"}
@@ -115,7 +104,6 @@ export default function Login() {
               </Grid>
             </Box>
           </Box>
-          <Copyright sx={{ mt: 8, mb: 4 }} />
         </Container>
       </Box>
     </ThemeProvider>
