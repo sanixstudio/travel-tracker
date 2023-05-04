@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { TextField } from "@mui/material";
-import { Link } from "react-router-dom";
+// import LoadingButton from "@mui/lab/LoadingButton";
 
 const style = {
   p: 4,
@@ -25,10 +25,11 @@ const style = {
 export default function RegisterModal({ open, setOpen }) {
   const [successMessage, setSuccessMessage] = React.useState("");
   const [erroMessage, setErrorMessage] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+ 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -53,7 +54,7 @@ export default function RegisterModal({ open, setOpen }) {
         setSuccessMessage(true);
         console.log(user);
         setTimeout(() => {
-          navigate("/");
+          Navigate("/");
         }, 2000);
       }
     } catch (err) {
@@ -84,7 +85,7 @@ export default function RegisterModal({ open, setOpen }) {
               Register
             </Typography>
           </Box>
-          <Box component="form" onSubmit={handleSubmit} noValidate>
+          <Box component="form" onSubmit={handleSubmit}>
             <TextField
               margin="normal"
               required
@@ -131,12 +132,15 @@ export default function RegisterModal({ open, setOpen }) {
               fullWidth
               color="teal"
               variant="contained"
+              disabled={isLoading}
               sx={{ mt: 3, mb: 2, color: "#fff" }}
             >
               Sign In
             </Button>
           </Box>
-          <Button color="teal">{"cancel"}</Button>
+          <Button color="teal" onClick={() => setOpen(false)}>
+            {"cancel"}
+          </Button>
         </Box>
       </Modal>
     </div>

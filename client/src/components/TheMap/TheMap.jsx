@@ -8,10 +8,10 @@ import Map, {
   ScaleControl,
 } from "react-map-gl";
 import { TiLocation } from "react-icons/ti";
-import "./style.css";
 import TrackerForm from "../TrackerForm/TrackerForm";
 import Popups from "../Popups/Popups";
 import AppHeader from "../AppHeader/AppHeader";
+import AlertButton from "../AlertButton/AlertButton";
 
 function TheMap() {
   const [viewState, setViewState] = React.useState({
@@ -23,6 +23,7 @@ function TheMap() {
   const [allTrackers, setAllTrackers] = useState([]);
   const [showAllPopup, setShowAllPopup] = useState(false);
   const [formIsOpen, setFormIsOpen] = useState(false);
+  const [isOkOpen, setIsOkOpen] = useState(false);
   const [currentPosition, setCurrentPosition] = useState({ lat: 0, long: 0 });
 
   const mapboxToken = import.meta.env.VITE_PUBLIC_KEY;
@@ -34,7 +35,7 @@ function TheMap() {
       setAllTrackers(trackers);
     };
     fetchTrackers();
-  }, []);
+  }, [allTrackers]);
 
   return (
     <>
@@ -87,6 +88,7 @@ function TheMap() {
               formIsOpen={formIsOpen}
               currentPosition={currentPosition}
               setCurrentPosition={setCurrentPosition}
+              setOpen={setIsOkOpen}
             />
           </Popup>
         ) : null}
@@ -94,6 +96,7 @@ function TheMap() {
         <NavigationControl position="bottom-right" />
         <FullscreenControl position="bottom-right" />
         <GeolocateControl position="bottom-right" />
+        <AlertButton open={isOkOpen} setOpen={setIsOkOpen} />
       </Map>
     </>
   );

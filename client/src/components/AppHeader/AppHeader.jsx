@@ -42,7 +42,7 @@ function AppHeader({ showAllPopup, setShowAllPopup }) {
               background: "rgba(255, 255, 255, .5)",
               borderRadius: "0 0 3em 3em",
               backdropFilter: "blur(10px)",
-              zIndex: 10,
+              zIndex: 100,
             }}
           >
             <Box

@@ -18,11 +18,11 @@ const Popups = ({ tracker, showAllPopup }) => {
       <Popup
         longitude={tracker.long}
         latitude={tracker.lat}
-        anchor="right"
+        anchor="bottom"
         closeButton={false}
         closeOnClick={false}
         style={{
-          zIndex: showDetails ? 100 : "initial",
+          zIndex: showDetails ? 10 : "initial",
         }}
       >
         <Card sx={{ maxWidth: 400 }}>
@@ -41,8 +41,9 @@ const Popups = ({ tracker, showAllPopup }) => {
               />
             }
             sx={{
-              background: "teal",
+              background: '#0aadad',
               color: "white",
+              p: ".5em 1.5em",
             }}
           />
           <CardContent sx={{ display: showDetails ? "block" : "none" }}>
@@ -54,7 +55,7 @@ const Popups = ({ tracker, showAllPopup }) => {
               <Typography variant="subtitle2">Ratings</Typography>
               <Box sx={{ display: "flex" }}>
                 {[...Array(tracker.rating)].map((_, index) => (
-                  <FaStar key={uuidv4()} sx={{ color: "gold" }} />
+                  <FaStar key={uuidv4()} color="gold" />
                 ))}
               </Box>
             </Box>

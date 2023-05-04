@@ -4,7 +4,6 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { TextField } from "@mui/material";
-import { Link } from "react-router-dom";
 
 const style = {
   p: 4,
@@ -23,6 +22,8 @@ const style = {
 };
 
 export default function LoginModal({ open, setOpen }) {
+  const [isLoading, setIsLoading] = React.useState(false);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -72,17 +73,17 @@ export default function LoginModal({ open, setOpen }) {
             <Button
               type="submit"
               fullWidth
+              color="teal"
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              disabled={isLoading}
+              sx={{ mt: 3, mb: 2, color: "#fff" }}
             >
               Sign In
             </Button>
           </Box>
-          <Box>
-            <Link href="/register" variant="body2">
-              {"Don't have an account? Sign Up"}
-            </Link>
-          </Box>
+          <Button color="teal" onClick={() => setOpen(false)}>
+            {"cancel"}
+          </Button>
         </Box>
       </Modal>
     </div>
