@@ -3,8 +3,9 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { TextField } from "@mui/material";
-// import LoadingButton from "@mui/lab/LoadingButton";
+import { Alert, TextField } from "@mui/material";
+import AlertButton from "../AlertButton/AlertButton";
+import axios from "axios";
 
 const style = {
   p: 4,
@@ -23,15 +24,15 @@ const style = {
 };
 
 export default function RegisterModal({ open, setOpen }) {
-  const [successMessage, setSuccessMessage] = React.useState("");
+  const [isOkOpen, setIsOkOpen] = React.useState(false);
   const [erroMessage, setErrorMessage] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
- 
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     const data = new FormData(event.currentTarget);
     const newUserData = {
       username: data.get("username"),
@@ -39,8 +40,9 @@ export default function RegisterModal({ open, setOpen }) {
       password: data.get("password"),
     };
 
+    console.log(newUserData);
+
     try {
-      setIsLoading(true);
       const res = await axios.post(
         `${import.meta.env.VITE_HOST}/user/register`,
         newUserData
@@ -49,24 +51,16 @@ export default function RegisterModal({ open, setOpen }) {
       const user = await res.json();
 
       if (user) {
-        setErrorMessage("");
-        setIsLoading(false);
-        setSuccessMessage(true);
         console.log(user);
-        setTimeout(() => {
-          Navigate("/");
-        }, 2000);
       }
     } catch (err) {
-      setIsLoading(false);
-      setSuccessMessage(false);
-      setErrorMessage(err.response.data.errors[0].msg);
+      console.log("Error: " + err);
+      setErrorMessage(err);
     }
   };
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -122,17 +116,13 @@ export default function RegisterModal({ open, setOpen }) {
                 {erroMessage}
               </Alert>
             ) : null}
-            {successMessage ? (
-              <Alert variant="filled" severity="success">
-                Registeration successful, redirecting...
-              </Alert>
-            ) : null}
+            <AlertButton open={isOkOpen} setOpen={setIsOkOpen} />
             <Button
               type="submit"
               fullWidth
               color="teal"
               variant="contained"
-              disabled={isLoading}
+              //   disabled={isLoading}
               sx={{ mt: 3, mb: 2, color: "#fff" }}
             >
               Sign In

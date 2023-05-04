@@ -35,7 +35,7 @@ function TheMap() {
       setAllTrackers(trackers);
     };
     fetchTrackers();
-  }, [allTrackers]);
+  }, []);
 
   return (
     <>
@@ -94,7 +94,6 @@ function TheMap() {
         ) : null}
         <ScaleControl />
         <NavigationControl position="bottom-right" />
-        <FullscreenControl position="bottom-right" />
         <GeolocateControl position="bottom-right" />
         <AlertButton open={isOkOpen} setOpen={setIsOkOpen} />
       </Map>

@@ -29,7 +29,6 @@ export default function LoginModal({ open, setOpen }) {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
       <Modal
         open={open}
         onClose={handleClose}

@@ -174,12 +174,12 @@ function AppHeader({ showAllPopup, setShowAllPopup }) {
             </Stack>
           </Toolbar>
         </Container>
-      </AppBar>
-      <LoginModal open={loginModalIsOpen} setOpen={setLoginModalIsOpen} />
+        <LoginModal open={loginModalIsOpen} setOpen={setLoginModalIsOpen} />
       <RegisterModal
         open={registerModalIsOpen}
         setOpen={setRegisterModalIsOpen}
       />
+      </AppBar>
     </>
   );
 }
