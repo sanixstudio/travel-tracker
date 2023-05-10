@@ -8,7 +8,6 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useNavigation } from "react-router-dom";
 import axios from "axios";
 import { Alert } from "@mui/material";
 
@@ -37,8 +36,6 @@ export default function Register() {
   const [erroMessage, setErrorMessage] = React.useState("");
   const [successMessage, setSuccessMessage] = React.useState(false);
 
-  const navigate = useNavigation();
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -62,9 +59,6 @@ export default function Register() {
         setIsLoading(false);
         setSuccessMessage(true);
         console.log(user);
-        setTimeout(() => {
-          navigate("/");
-        }, 2000);
       }
     } catch (err) {
       setIsLoading(false);

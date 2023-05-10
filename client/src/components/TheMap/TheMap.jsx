@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Map, {
-  FullscreenControl,
   GeolocateControl,
   Marker,
   NavigationControl,
@@ -35,7 +34,7 @@ function TheMap() {
       setAllTrackers(trackers);
     };
     fetchTrackers();
-  }, []);
+  }, [allTrackers]);
 
   return (
     <>

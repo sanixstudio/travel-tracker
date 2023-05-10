@@ -9,7 +9,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import FmdGoodIcon from "@mui/icons-material/FmdGood";
 import LogoutIcon from "@mui/icons-material/Logout";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
@@ -18,6 +17,7 @@ import { Stack } from "@mui/material";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 
+// eslint-disable-next-line react/prop-types
 function AppHeader({ showAllPopup, setShowAllPopup }) {
   const [user, setUser] = React.useState("");
   const [loginModalIsOpen, setLoginModalIsOpen] = React.useState(false);
@@ -175,12 +175,13 @@ function AppHeader({ showAllPopup, setShowAllPopup }) {
           </Toolbar>
         </Container>
         <LoginModal open={loginModalIsOpen} setOpen={setLoginModalIsOpen} />
-      <RegisterModal
-        open={registerModalIsOpen}
-        setOpen={setRegisterModalIsOpen}
-      />
+        <RegisterModal
+          open={registerModalIsOpen}
+          setOpen={setRegisterModalIsOpen}
+        />
       </AppBar>
     </>
   );
 }
+
 export default AppHeader;
