@@ -8,6 +8,7 @@ import {
   AccordionDetails,
   AccordionSummary,
   Box,
+  Button,
   CardContent,
   Typography,
 } from "@mui/material";
@@ -29,8 +30,20 @@ const Popups = ({ tracker, showAllPopup }) => {
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography>{tracker.title}</Typography>
-            <MoreHorizIcon />
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                width: "100%",
+              }}
+            >
+              <Typography>{tracker.title}</Typography>
+              <Button>
+                <MoreHorizIcon
+                  sx={{ "&:hover": { border: "solid 1px red" } }}
+                />
+              </Button>
+            </Box>
           </AccordionSummary>
           <AccordionDetails>
             <CardContent sx={{ display: "block" }}>
